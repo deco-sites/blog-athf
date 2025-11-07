@@ -1,8 +1,6 @@
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
-type Type = "dark" | "light";
-
 export interface CTA {
   id?: string;
   href: string;
@@ -10,139 +8,167 @@ export interface CTA {
   outline?: boolean;
 }
 
-export interface Nav {
+/** 
+ * Header configuration 
+ */
+export interface Props {
+  /**
+   * @title Logo
+   * @description Imagem e texto principal do cabeçalho
+   */
   logo?: {
+    /**
+     * @format image
+     * @title Imagem do Logo
+     * @default https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/1527/67120bcd-936a-4ea5-a760-02ed5c4a3d04
+     */
     src?: ImageWidget;
+    /** @default "ATHF Logo" */
     alt?: string;
+    /** @default "ATHF" */
+    title?: string;
+    /** @default "Poker Club" */
+    subtitle?: string;
   };
-  navigation?: {
-    links: {
-      label?: string;
-      url?: string;
-    }[];
-    buttons: CTA[];
-  };
+
+  /**
+   * @title Links de navegação
+   * @default [{"label":"Início","url":"#inicio"},{"label":"Eventos","url":"#eventos"},{"label":"Sobre","url":"#sobre"},{"label":"Blog","url":"#blog"},{"label":"E-book","url":"#ebook"},{"label":"Contato","url":"#contato"}]
+   */
+  links?: { label?: string; url?: string }[];
+
+  /**
+   * @title Botão principal
+   * @default [{"id":"cta-1","href":"/entrar","text":"Entrar no Clube","outline":false}]
+   */
+  cta?: CTA[];
+
+  /**
+   * @title Cor de fundo
+   * @default bg-background/95
+   */
+  background?: string;
+
+  /**
+   * @title Ativar borda inferior
+   * @default true
+   */
+  border?: boolean;
 }
 
-export const ColorType: Record<Type, string> = {
-  "dark": "base-content",
-  "light": "base-100",
-};
-
-export const StyleType: Record<"background" | "color", string> = {
-  "background": "bg-",
-  "color": "text-",
-};
-
-const generateLineStyles = (position: string) => `
-  absolute ${position} z-50 block h-0.5 w-7 bg-black transition-all duration-200 ease-out 
-`;
-
-const lineStyles = [
-  generateLineStyles("top-[-0.7rem]") +
-  "peer-checked:translate-y-[0.7rem] peer-checked:rotate-[45deg]",
-  generateLineStyles("top-[-0.35rem]") + "peer-checked:opacity-0",
-  generateLineStyles("top-[0]") +
-  "peer-checked:-translate-y-[0.2rem] peer-checked:-rotate-[45deg]",
-];
-
-export default function Haader({
+export default function Header({
   logo = {
     src:
       "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/1527/67120bcd-936a-4ea5-a760-02ed5c4a3d04",
-    alt: "Logo",
+    alt: "ATHF Logo",
+    title: "ATHF",
+    subtitle: "Poker Club",
   },
-  navigation = {
-    links: [
-      { label: "Home", url: "/" },
-      { label: "About us", url: "/" },
-      { label: "Princing", url: "/" },
-      { label: "Contact", url: "/" },
-    ],
-    buttons: [
-      { id: "change-me-1", href: "/", text: "Change me", outline: false },
-      { id: "change-me-2", href: "/", text: "Change me", outline: true },
-    ],
-  },
-}: Nav) {
+  links = [
+    { label: "Início", url: "#inicio" },
+    { label: "Eventos", url: "#eventos" },
+    { label: "Sobre", url: "#sobre" },
+    { label: "Blog", url: "#blog" },
+    { label: "E-book", url: "#ebook" },
+    { label: "Contato", url: "#contato" },
+  ],
+  cta = [{ id: "cta-1", href: "/entrar", text: "Entrar no Clube" }],
+  background = "bg-background/95",
+  border = true,
+}: Props) {
   return (
-    <nav class="container mx-auto lg:px-0 px-4">
-      <div class="flex gap-8 items-center justify-between py-4">
-        <a href="/">
-          <Image src={logo.src || ""} width={100} height={28} alt={logo.alt} />
-        </a>
-
-        <label
-          class="cursor-pointer lg:hidden pt-6 relative z-40"
-          for="menu-mobile"
-        >
-          <input class="hidden peer" type="checkbox" id="menu-mobile" />
-          {lineStyles.map((style, index) => (
-            <div key={index} class={`relative ${style}`}></div>
-          ))}
-          <div class="backdrop-blur-sm bg-black/50 fixed h-full hidden inset-0 peer-checked:block w-full z-40">
-            &nbsp;
-          </div>
-          <div class="duration-500 fixed h-full overflow-y-auto overscroll-y-none peer-checked:translate-x-0 right-0 top-0 transition translate-x-full w-full z-40">
-            <div class="bg-base-100 flex flex-col float-right gap-8 min-h-full pt-12 px-6 shadow-2xl w-1/2">
-              <ul class="flex flex-col gap-8">
-                {navigation?.links.map((link) => (
-                  <li>
-                    <a href={link.url} aria-label={link.label}>
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <ul class="flex items-center gap-3">
-                {navigation.buttons?.map((item) => (
-                  <a
-                    key={item?.id}
-                    id={item?.id}
-                    href={item?.href}
-                    target={item?.href.includes("http") ? "_blank" : "_self"}
-                    class={`font-normal btn btn-primary ${
-                      item.outline && "btn-outline"
-                    }`}
-                  >
-                    {item?.text}
-                  </a>
-                ))}
-              </ul>
+    <nav
+      class={`fixed top-0 left-0 right-0 z-50 ${background} backdrop-blur-sm ${
+        border ? "border-b border-border" : ""
+      }`}
+    >
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-20">
+          {/* Logo */}
+          <a href="#inicio" class="flex items-center gap-3 group">
+            <Image
+              src={logo.src || ""}
+              alt={logo.alt || "Logo"}
+              width={48}
+              height={48}
+              class="h-12 w-12 rounded-full transition-transform duration-300 group-hover:scale-110"
+            />
+            <div class="flex flex-col">
+              <span class="text-xl font-bold text-primary">
+                {logo.title}
+              </span>
+              <span class="text-xs text-muted-foreground">
+                {logo.subtitle}
+              </span>
             </div>
-          </div>
-        </label>
+          </a>
 
-        <ul class="hidden items-center justify-between lg:flex">
-          <ul class="flex">
-            {navigation.links.map((link) => (
-              <li>
+          {/* Mobile Menu Button */}
+          <label
+            for="menu-toggle"
+            class="cursor-pointer md:hidden text-foreground hover:text-primary transition-colors"
+          >
+            <input id="menu-toggle" type="checkbox" class="hidden peer" />
+            <div class="relative w-7 h-6 flex flex-col justify-between">
+              <span class="block h-0.5 bg-foreground transition-all duration-300 peer-checked:rotate-45 peer-checked:translate-y-[10px]"></span>
+              <span class="block h-0.5 bg-foreground transition-all duration-300 peer-checked:opacity-0"></span>
+              <span class="block h-0.5 bg-foreground transition-all duration-300 peer-checked:-rotate-45 peer-checked:-translate-y-[10px]"></span>
+            </div>
+
+            {/* Mobile menu overlay */}
+            <div class="peer-checked:block hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40" />
+
+            {/* Mobile Menu */}
+            <div class="fixed top-0 right-0 w-1/2 bg-base-100 shadow-2xl z-50 h-full translate-x-full peer-checked:translate-x-0 transition-transform duration-500 p-6 flex flex-col gap-6">
+              {links.map((link) => (
                 <a
                   href={link.url}
-                  aria-label={link.label}
-                  class="link no-underline hover:underline p-4"
+                  class="block text-foreground hover:text-primary transition-colors border-b border-border py-3"
                 >
                   {link.label}
                 </a>
-              </li>
-            ))}
-          </ul>
-          <ul class="flex gap-3">
-            {navigation.buttons?.map((item) => (
+              ))}
+              {cta.map((item) => (
+                <a
+                  key={item.id}
+                  href={item.href}
+                  target={item.href.includes("http") ? "_blank" : "_self"}
+                  class={`w-full btn btn-primary ${
+                    item.outline ? "btn-outline" : ""
+                  }`}
+                >
+                  {item.text}
+                </a>
+              ))}
+            </div>
+          </label>
+
+          {/* Desktop Menu */}
+          <div class="hidden md:flex items-center gap-8">
+            {links.map((link) => (
               <a
-                key={item?.id}
-                id={item?.id}
-                href={item?.href}
-                target={item?.href.includes("http") ? "_blank" : "_self"}
-                class={`font-normal btn btn-primary ${
-                  item.outline && "btn-outline"
-                }`}
+                key={link.url}
+                href={link.url}
+                class="text-foreground hover:text-primary transition-colors duration-300 font-medium relative group"
               >
-                {item?.text}
+                {link.label}
+                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
-          </ul>
-        </ul>
+            {cta.map((item) => (
+              <a
+                key={item.id}
+                href={item.href}
+                target={item.href.includes("http") ? "_blank" : "_self"}
+                class={`btn btn-primary bg-gradient-primary shadow-glow hover:shadow-accent ${
+                  item.outline ? "btn-outline" : ""
+                }`}
+              >
+                {item.text}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </nav>
   );
