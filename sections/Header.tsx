@@ -33,13 +33,11 @@ export interface Props {
 
   /**
    * @title Links de navegação
-   * @default [{"label":"Início","url":"#inicio"},{"label":"Eventos","url":"#eventos"},{"label":"Sobre","url":"#sobre"},{"label":"Blog","url":"#blog"},{"label":"E-book","url":"#ebook"},{"label":"Contato","url":"#contato"}]
    */
   links?: { label?: string; url?: string }[];
 
   /**
    * @title Botão principal
-   * @default [{"id":"cta-1","href":"/entrar","text":"Entrar no Clube","outline":false}]
    */
   cta?: CTA[];
 
@@ -76,6 +74,7 @@ export default function Header({
   background = "bg-background/95",
   border = true,
 }: Props) {
+  console.log({links})
   return (
     <nav
       class={`fixed top-0 left-0 right-0 z-50 ${background} backdrop-blur-sm ${
@@ -120,7 +119,7 @@ export default function Header({
 
             {/* Mobile Menu */}
             <div class="fixed top-0 right-0 w-1/2 bg-base-100 shadow-2xl z-50 h-full translate-x-full peer-checked:translate-x-0 transition-transform duration-500 p-6 flex flex-col gap-6">
-              {links.map((link) => (
+              {links?.length>0 && links?.map((link) => (
                 <a
                   href={link.url}
                   class="block text-foreground hover:text-primary transition-colors border-b border-border py-3"
@@ -145,8 +144,8 @@ export default function Header({
 
           {/* Desktop Menu */}
           <div class="hidden md:flex items-center gap-8">
-            {links.map((link) => (
-              <a
+            {links?.length>0 && links?.map((link) => ( 
+              <a 
                 key={link.url}
                 href={link.url}
                 class="text-foreground hover:text-primary transition-colors duration-300 font-medium relative group"

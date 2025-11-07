@@ -1,3 +1,42 @@
 {
-  "__resolveType": "site/sections/Footer.tsx"
+  "__resolveType": "site/sections/Footer.tsx",
+  "brandName": "\"ATHF\"",
+  "slogan": "\"Associação Texas Holdem Friburgo - Sua comunidade de poker profissional\"",
+  "sections": [
+    {
+      "title": "Navegação",
+      "links": [
+        { "label": "Início", "href": "#inicio" },
+        { "label": "Eventos", "href": "#eventos" },
+        { "label": "Sobre", "href": "#sobre" },
+        { "label": "Blog", "href": "#blog" }
+      ]
+    },
+    {
+      "title": "Recursos",
+      "links": [
+        { "label": "E-book Gratuito", "href": "https://ricksardella.substack.com/p/ebook-gratis-do-iniciante-ao-profissional" },
+        { "label": "Material de Estudo", "href": "http://ricksardella.substack.com" },
+        { "label": "Série YouTube", "href": "https://www.youtube.com/playlist?list=PLP2D4FJTio_EOGF8zgmmA0yRNMgoIVCN0" }
+      ]
+    },
+    {
+      "title": "Clubes Online",
+      "links": [
+        { "label": "PPPoker", "href": "https://pppoker.club/poker/api/share.php?share_type=club&time=1716238070&lang=pt&uid=1980972&club_id=453868&club_name=CSP+RJ&id=453868_0&lan=pt&type=1" },
+        { "label": "KKPoker", "href": "https://kkpoker.club/153128" },
+        { "label": "Grupo WhatsApp", "href": "https://chat.whatsapp.com/KUSoNIIyGwz7V7xaEQgCoU" }
+      ]
+    }
+  ],
+  "stats": [
+    { "label": "Seguidores", "value": "4.906" },
+    { "label": "Seguindo", "value": "5.282" },
+    { "label": "Posts", "value": "1.362" }
+  ],
+  "socialLinks" : {
+    "instagram": "https://www.instagram.com/athfoficial",
+    "youtube": "https://www.youtube.com/playlist?list=PLP2D4FJTio_EOGF8zgmmA0yRNMgoIVCN0",
+  },
+  "logo": "https://assets.decocache.com/blog-athf/1610637d-9f16-4ef5-8f41-a3dca0a6b198/logo-(2).jpg"
 }

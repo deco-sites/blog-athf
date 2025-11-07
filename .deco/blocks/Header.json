@@ -16,5 +16,22 @@
       }
     ],
     "buttons": []
-  }
+  },
+  "logo": {
+    "src": "https://assets.decocache.com/blog-athf/1610637d-9f16-4ef5-8f41-a3dca0a6b198/logo-(2).jpg",
+    "alt": "\"ATHF Logo\"",
+    "title": "\"ATHF\"",
+    "subtitle": "\"Poker Club\""
+  },
+  "background": "bg-background/95",
+  "border": true,
+  "links": [
+    { "label": "Início", "url": "#inicio" },
+    { "label": "Eventos", "url": "#eventos" },
+    { "label": "Sobre", "url": "#sobre" },
+    { "label": "Blog", "url": "#blog" },
+    { "label": "E-book", "url": "#ebook" },
+    { "label": "Contato", "url": "#contato" }
+  ],
+  "cta": [{ "id": "cta-1", "href": "/entrar", "text": "Entrar no Clube" }]
 }

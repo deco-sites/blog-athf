@@ -5,31 +5,41 @@
 import * as $$$$$$$$$$$0 from "./apps/deco/blog.ts";
 import * as $$$$$$$$$$$1 from "./apps/deco/htmx.ts";
 import * as $$$$$$$$$$$2 from "./apps/site.ts";
-import * as $$$$$$0 from "./sections/BlogPost.tsx";
-import * as $$$$$$1 from "./sections/BlogPosts.tsx";
-import * as $$$$$$2 from "./sections/Faq.tsx";
-import * as $$$$$$3 from "./sections/Footer.tsx";
-import * as $$$$$$4 from "./sections/Header.tsx";
-import * as $$$$$$5 from "./sections/Hero.tsx";
-import * as $$$$$$6 from "./sections/ImageWithParagraph.tsx";
-import * as $$$$$$7 from "./sections/Logos.tsx";
-import * as $$$$$$8 from "./sections/MainPost.tsx";
-import * as $$$$$$9 from "./sections/Testimonials.tsx";
-import * as $$$$$$10 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$0 from "./sections/About.tsx";
+import * as $$$$$$1 from "./sections/Blog.tsx";
+import * as $$$$$$2 from "./sections/BlogPost.tsx";
+import * as $$$$$$3 from "./sections/BlogPosts.tsx";
+import * as $$$$$$4 from "./sections/ClubsSection.tsx";
+import * as $$$$$$5 from "./sections/EbookSection.tsx";
+import * as $$$$$$6 from "./sections/Events.tsx";
+import * as $$$$$$7 from "./sections/Faq.tsx";
+import * as $$$$$$8 from "./sections/Footer.tsx";
+import * as $$$$$$9 from "./sections/Header.tsx";
+import * as $$$$$$10 from "./sections/Hero.tsx";
+import * as $$$$$$11 from "./sections/ImageWithParagraph.tsx";
+import * as $$$$$$12 from "./sections/Logos.tsx";
+import * as $$$$$$13 from "./sections/MainPost.tsx";
+import * as $$$$$$14 from "./sections/Testimonials.tsx";
+import * as $$$$$$15 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "sections": {
-    "site/sections/BlogPost.tsx": $$$$$$0,
-    "site/sections/BlogPosts.tsx": $$$$$$1,
-    "site/sections/Faq.tsx": $$$$$$2,
-    "site/sections/Footer.tsx": $$$$$$3,
-    "site/sections/Header.tsx": $$$$$$4,
-    "site/sections/Hero.tsx": $$$$$$5,
-    "site/sections/ImageWithParagraph.tsx": $$$$$$6,
-    "site/sections/Logos.tsx": $$$$$$7,
-    "site/sections/MainPost.tsx": $$$$$$8,
-    "site/sections/Testimonials.tsx": $$$$$$9,
-    "site/sections/Theme/Theme.tsx": $$$$$$10,
+    "site/sections/About.tsx": $$$$$$0,
+    "site/sections/Blog.tsx": $$$$$$1,
+    "site/sections/BlogPost.tsx": $$$$$$2,
+    "site/sections/BlogPosts.tsx": $$$$$$3,
+    "site/sections/ClubsSection.tsx": $$$$$$4,
+    "site/sections/EbookSection.tsx": $$$$$$5,
+    "site/sections/Events.tsx": $$$$$$6,
+    "site/sections/Faq.tsx": $$$$$$7,
+    "site/sections/Footer.tsx": $$$$$$8,
+    "site/sections/Header.tsx": $$$$$$9,
+    "site/sections/Hero.tsx": $$$$$$10,
+    "site/sections/ImageWithParagraph.tsx": $$$$$$11,
+    "site/sections/Logos.tsx": $$$$$$12,
+    "site/sections/MainPost.tsx": $$$$$$13,
+    "site/sections/Testimonials.tsx": $$$$$$14,
+    "site/sections/Theme/Theme.tsx": $$$$$$15,
   },
   "apps": {
     "site/apps/deco/blog.ts": $$$$$$$$$$$0,
