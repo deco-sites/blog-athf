@@ -1,151 +1,225 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
-/** 
- * @title Informações de cada torneio
+/**
+ * @title Classificado
+ * @description Representa um jogador classificado em um torneio.
+ */
+export interface Player {
+  /**
+   * @title Posição
+   * @description Colocação do jogador no torneio.
+   * @default 1
+   */
+  position: number;
+
+  /**
+   * @title Nome
+   * @description Nome completo ou apelido do jogador.
+   * @default "João Silva"
+   */
+  name: string;
+
+  /**
+   * @title Fichas restantes
+   * @description Quantidade de fichas que o jogador possui atualmente.
+   * @default "120K"
+   */
+  chips: string;
+
+  /**
+   * @title Prêmio
+   * @description Indica se o jogador recebeu prêmio.
+   */
+  prize: string;
+}
+
+/**
+ * @title Evento
+ * @description Estrutura de informações de um torneio.
  */
 export interface Event {
   /**
    * @title Título do evento
-   * @description Nome principal do torneio exibido no card.
    * @default "Torneio Bye Bye 2025"
    */
   title: string;
 
   /**
    * @title Data
-   * @description Data e dia da semana do evento.
-   * @default "13/12 - Sábado"
+   * @format date
+   * @default "2025-11-14"
    */
   date: string;
 
   /**
-   * @title Horário
-   * @description Horário de início do evento.
-   * @default "14h"
+   * @title Horário - (00 - 23)
+   * @default "14"
    */
   time: string;
 
   /**
    * @title Valor do Buy-in
-   * @description Valor de entrada do torneio.
    * @default "R$ 200"
    */
   buyIn: string;
 
   /**
    * @title Fichas iniciais
-   * @description Quantidade de fichas recebidas no buy-in.
    * @default "20K Fichas"
    */
   chips: string;
 
   /**
    * @title Rebuy
-   * @description Condições e valor do rebuy.
    * @default "R$ 200 - 30K Fichas"
    */
   rebuy: string;
 
   /**
    * @title Add-on
-   * @description Fichas adicionais ao final do período de rebuy.
    * @default "40K Fichas"
    */
   addon: string;
 
   /**
    * @title Duração dos blinds
-   * @description Tempo entre as mudanças de blind.
    * @default "20 minutos"
    */
   blinds: string;
 
   /**
-   * @title Duração da mesa final
-   * @description Tempo dos blinds na mesa final.
+   * @title Mesa final
    * @default "30 minutos"
    */
   finalTable: string;
 
   /**
    * @title Status
-   * @description Indica se o torneio é o próximo, em andamento, etc.
-   * @default "Próximo"
+   * @description Ex: "Próximo", "Em andamento", "Finalizado"
+   * @default "Main Event"
    */
   status: string;
+
+  /**
+   * @title Banner do evento
+   * @description Imagem de destaque do torneio (largura recomendada 1200x400).
+   */
+  banner?: ImageWidget;
+  /**
+   * @title Link do Evento Principal
+   * @description Imagem de destaque do torneio (largura recomendada 1200x400).
+   */
+  linkMainEvent?: ImageWidget;
+
+  /**
+   * @title Jogadores classificados
+   * @description Lista dos jogadores classificados neste torneio.
+   */
+  players?: Player[];
 }
 
-/** 
+/**
  * @title Props do componente EventsSection
  */
 export interface Props {
   /**
    * @title ID da seção
-   * @description Identificador HTML da seção.
    * @default "eventos"
    */
   id?: string;
 
   /**
    * @title Título principal
-   * @description Texto principal do cabeçalho da seção.
-   * @default "Eventos Agendados"
+   * @default "Eventos"
    */
   title?: string;
 
   /**
    * @title Destaque do título
-   * @description Parte do título que aparece colorida.
    * @default "Agendados"
    */
   highlight?: string;
 
   /**
    * @title Subtítulo
-   * @description Texto de apoio exibido abaixo do título.
    * @default "Participe dos nossos torneios oficiais e mostre suas habilidades na mesa"
    */
   subtitle?: string;
 
   /**
    * @title Rótulo do selo
-   * @description Texto do badge exibido acima do título.
-   * @default "Próximos Torneios"
+   * @default "Torneio em Destaque"
    */
   badgeText?: string;
 
   /**
-   * @title Lista de eventos
-   * @description Lista de torneios a serem exibidos em cards.
+   * @title Evento em destaque
+   * @description Evento principal exibido com banner e classificados.
    */
-  events?: Event[];
+  featuredEvent: Event;
+
+  /**
+   * @title Próximos eventos
+   * @description Lista de eventos menores que aparecem abaixo do destaque.
+   */
+  upcomingEvents?: Event[];
 }
 
 /**
  * @title EventsSection
- * @description Seção de eventos e torneios com cards informativos.
+ * @description Seção de torneios com destaque e próximos eventos.
  */
 export default function EventsSection({
   id = "eventos",
-  badgeText = "Próximos Torneios",
+  badgeText = "Torneio em Destaque",
   title = "Eventos",
   highlight = "Agendados",
   subtitle = "Participe dos nossos torneios oficiais e mostre suas habilidades na mesa",
-  events = [
+  featuredEvent = {
+    title: "Satélite - Torneio Bye Bye 2025",
+    date: "2025-11-09",
+    time: "14",
+    buyIn: "R$ 10",
+    chips: "20K Fichas",
+    rebuy: "R$ 20 - 30K Fichas",
+    addon: "40K Fichas",
+    blinds: "20 minutos",
+    finalTable: "30 minutos",
+    status: "Main Event",
+    linkMainEvent:
+      "https://pppoker.club/poker/api/share.php?share_type=share_2_mtt&uid=713650&lang=pt&lan=pt&time=1762880247&id=99165285_453868_2_16_0_&club_id=453868&club_name=CSP%20RJ",
+    banner:
+      "https://assets.decocache.com/blog-athf/44f8f3be-44ba-49a9-8900-06443227f10c/torneio.jpeg",
+    players: [
+      { position: 1, name: "Rafael", chips: "120K", prize: "Entrada Final - Bye Bye 2025" },
+      { position: 2, name: "Piolho ", chips: "85K", prize: "Entrada Final - Bye Bye 2025" },
+    ],
+  },
+  upcomingEvents = [
     {
-      title: "Torneio Bye Bye 2025",
-      date: "13/12 - Sábado",
-      time: "14h",
-      buyIn: "R$ 200",
-      chips: "20K Fichas",
-      rebuy: "R$ 200 - 30K Fichas",
-      addon: "40K Fichas",
-      blinds: "20 minutos",
-      finalTable: "30 minutos",
+      title: "Satélite de Verão",
+      date: "20/12 - Sexta",
+      time: "19h",
+      buyIn: "R$ 100",
+      chips: "15K Fichas",
+      rebuy: "R$ 100 - 20K Fichas",
+      addon: "30K Fichas",
+      blinds: "15 minutos",
+      finalTable: "25 minutos",
       status: "Próximo",
     },
   ],
 }: Props) {
+  // Combina data e hora em um objeto Date
+  const eventDateTime = new Date(
+    `${featuredEvent?.date}T${featuredEvent?.time.padStart(2, "0")}:00:00`
+  );
+
+  // Data e hora atuais
+  const now = new Date();
+
+  // Verifica se o evento já passou
+  const hasPassed = eventDateTime < now;
   return (
     <section id={id} class="py-20 bg-secondary/30">
       <div class="container mx-auto px-4">
@@ -164,99 +238,157 @@ export default function EventsSection({
           </p>
         </div>
 
-        {/* Lista de eventos */}
+        {/* Evento em destaque */}
+        <div class="bg-gradient-card border border-border rounded-xl overflow-hidden mb-16 shadow-lg animate-slide-up grid xl:grid-cols-3">
+          {featuredEvent.banner && (
+            <img
+              src={featuredEvent.banner}
+              alt={featuredEvent.title}
+              class="w-full aspect-square"
+            />
+          )}
+
+          <div class="p-6 md:p-8">
+            <div class="flex items-center justify-between mb-4">
+              <div class="bg-accent text-accent-foreground text-xs font-semibold px-3 py-1 rounded-full">
+                {featuredEvent.status}
+              </div>
+              <div class="text-2xl text-accent">🏆</div>
+            </div>
+            <h3 class="text-3xl font-semibold mb-2">{featuredEvent.title}</h3>
+
+            <div class="flex flex-wrap gap-4 text-muted-foreground mb-6">
+              <div class="flex items-center gap-2">
+                <span class="text-primary text-lg">📅</span>
+                <span>{featuredEvent.date}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-primary text-lg">⏰</span>
+                <span>{featuredEvent.time}</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+              <div>
+                <p class="text-sm text-muted-foreground">Buy-in</p>
+                <p class="font-semibold">{featuredEvent.buyIn}</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Fichas</p>
+                <p class="font-semibold">{featuredEvent.chips}</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Rebuy</p>
+                <p class="font-semibold">{featuredEvent.rebuy}</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Add-on</p>
+                <p class="font-semibold">{featuredEvent.addon}</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Blinds</p>
+                <p class="font-semibold">{featuredEvent.blinds}</p>
+              </div>
+              <div>
+                <p class="text-sm text-muted-foreground">Mesa Final</p>
+                <p class="font-semibold">{featuredEvent.finalTable}</p>
+              </div>
+            </div>
+
+            {hasPassed ? (
+              <p
+                class="inline-block px-6 py-3 rounded-lg text-sm font-semibold
+         bg-gray-300/50 text-gray-600 border border-gray-400/30
+         cursor-not-allowed select-none
+         shadow-inner transition-all duration-300"
+              >
+                Torneio Finalizado
+              </p>
+            ) : (
+              <a
+                href={featuredEvent.linkMainEvent}
+                target={
+                  featuredEvent.linkMainEvent.includes("http")
+                    ? "_blank"
+                    : "_self"
+                }
+                class={`btn btn-primary bg-gradient-primary shadow-glow hover:shadow-accent`}
+              >
+                Inscrever-se agora!
+              </a>
+            )}
+          </div>
+
+          {/* Classificados */}
+          {featuredEvent.players && featuredEvent.players.length > 0 && (
+            <div className="p-6 md:p-8">
+              <h4 class="text-xl font-semibold mb-3">Classificados</h4>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm border-t border-border">
+                  <thead>
+                    <tr class="text-left text-muted-foreground border-b border-border">
+                      <th class="py-2 px-2">Posição</th>
+                      <th class="py-2 px-2">Nome</th>
+                      <th class="py-2 px-2">Fichas</th>
+                      <th class="py-2 px-2">Prêmio🏅</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {featuredEvent.players.map((player) => (
+                      <tr
+                        class={`border-b border-border ${
+                          player.prize ? "bg-primary/10" : ""
+                        }`}
+                      >
+                        <td class="py-2 px-2 font-medium">
+                          {player.position}º
+                        </td>
+                        <td class="py-2 px-2">{player.name}</td>
+                        <td class="py-2 px-2">{player.chips}</td>
+                        <td class="py-2 px-2">
+                          {player.prize ? (
+                            <span class="text-primary font-semibold">
+                              {player.prize}{" "}
+                            </span>
+                          ) : (
+                            "—"
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Próximos eventos */}
+        <h3 class="text-2xl font-bold mb-6">Próximos Torneios</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {events.map((event, index) => (
+          {upcomingEvents.map((event, index) => (
             <div
               key={index}
-              class="bg-gradient-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow animate-slide-up overflow-hidden group rounded-xl"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              class="bg-gradient-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow rounded-xl overflow-hidden"
             >
               <div class="h-2 bg-gradient-primary" />
-
               <div class="p-6">
-                <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center justify-between mb-3">
                   <div class="bg-accent text-accent-foreground text-xs font-semibold px-3 py-1 rounded-full">
                     {event.status}
                   </div>
-                  <div class="text-2xl text-accent">🏆</div>
+                  <div class="text-2xl text-accent">🎯</div>
                 </div>
 
-                <h3 class="text-2xl font-semibold mb-4 group-hover:text-primary transition-colors">
-                  {event.title}
-                </h3>
+                <h4 class="text-xl font-semibold mb-3">{event.title}</h4>
 
-                <div class="space-y-2 text-muted-foreground">
-                  <div class="flex items-center gap-2">
-                    <span class="text-primary text-lg">📅</span>
-                    <span>{event.date}</span>
-                  </div>
-
-                  <div class="flex items-center gap-2">
-                    <span class="text-primary text-lg">⏰</span>
-                    <span>{event.time}</span>
-                  </div>
+                <div class="space-y-1 text-muted-foreground text-sm">
+                  <div>📅 {event.date}</div>
+                  <div>⏰ {event.time}</div>
+                  <div>💰 {event.buyIn}</div>
                 </div>
-
-                <div class="border-t border-border mt-4 pt-4 space-y-2">
-                  <div class="flex justify-between">
-                    <span class="text-sm text-muted-foreground">Buy-in:</span>
-                    <span class="font-semibold text-accent">
-                      {event.buyIn} - {event.chips}
-                    </span>
-                  </div>
-
-                  <div class="flex justify-between">
-                    <span class="text-sm text-muted-foreground">Rebuy:</span>
-                    <span class="font-semibold">{event.rebuy}</span>
-                  </div>
-
-                  <div class="flex justify-between">
-                    <span class="text-sm text-muted-foreground">Add-on:</span>
-                    <span class="font-semibold">{event.addon}</span>
-                  </div>
-
-                  <div class="flex justify-between">
-                    <span class="text-sm text-muted-foreground">Blinds:</span>
-                    <span class="font-semibold">{event.blinds}</span>
-                  </div>
-
-                  <div class="flex justify-between">
-                    <span class="text-sm text-muted-foreground">Mesa Final:</span>
-                    <span class="font-semibold">{event.finalTable}</span>
-                  </div>
-                </div>
-
-                <a
-                  href="#"
-                  class="block w-full text-center mt-6 bg-gradient-primary text-white font-medium rounded-lg py-3 shadow-glow hover:shadow-accent transition-all duration-300"
-                >
-                  Inscrever-se
-                </a>
               </div>
             </div>
           ))}
-
-          {/* Cards de placeholder */}
-          <div class="bg-gradient-card border border-dashed border-border hover:border-primary/30 transition-all duration-300 flex items-center justify-center min-h-[400px] rounded-xl">
-            <div class="text-center p-6">
-              <div class="text-muted-foreground text-5xl mb-4">📅</div>
-              <h3 class="text-xl font-semibold mb-2">Em Breve</h3>
-              <p class="text-muted-foreground">
-                Novos eventos serão anunciados
-              </p>
-            </div>
-          </div>
-
-          <div class="bg-gradient-card border border-dashed border-border hover:border-primary/30 transition-all duration-300 flex items-center justify-center min-h-[400px] rounded-xl">
-            <div class="text-center p-6">
-              <div class="text-muted-foreground text-5xl mb-4">🏆</div>
-              <h3 class="text-xl font-semibold mb-2">Torneios Especiais</h3>
-              <p class="text-muted-foreground">
-                Fique atento às novidades
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>

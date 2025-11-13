@@ -3,6 +3,9 @@
   "path": "/",
   "sections": [
     {
+      "__resolveType": "site/sections/WhatsAppButton.tsx"
+    },
+    {
       "__resolveType": "Header"
     },
     {

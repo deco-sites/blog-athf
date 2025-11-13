@@ -21,6 +21,7 @@ import * as $$$$$$12 from "./sections/Logos.tsx";
 import * as $$$$$$13 from "./sections/MainPost.tsx";
 import * as $$$$$$14 from "./sections/Testimonials.tsx";
 import * as $$$$$$15 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$16 from "./sections/WhatsAppButton.tsx";
 
 const manifest = {
   "sections": {
@@ -40,6 +41,7 @@ const manifest = {
     "site/sections/MainPost.tsx": $$$$$$13,
     "site/sections/Testimonials.tsx": $$$$$$14,
     "site/sections/Theme/Theme.tsx": $$$$$$15,
+    "site/sections/WhatsAppButton.tsx": $$$$$$16,
   },
   "apps": {
     "site/apps/deco/blog.ts": $$$$$$$$$$$0,

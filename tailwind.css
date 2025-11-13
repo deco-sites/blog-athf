@@ -96,3 +96,26 @@
     display: none;
   }
 }
+
+#wpp-msg {
+  width: 0px;
+  height: 64px; 
+  border-radius: 16px;
+  opacity: 0;
+  bottom: 0;
+  right: 20px; 
+  background: transparent;
+  transition: 400ms all cubic-bezier(0.13, 1.12, 0.58, 1);
+  padding: 12px;
+}
+
+#wpp-msg p {
+  user-select: none;
+  cursor: default;
+}
+
+#wpp:hover #wpp-msg {
+  opacity: 1;
+  width: 250px;
+  background: white;
+}
